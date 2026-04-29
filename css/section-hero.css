@@ -50,7 +50,7 @@
 
 .hero-main-grid {
   display: grid;
-  grid-template-columns: 65% 35%; /* More distinct split to avoid 50/50 feel */
+  grid-template-columns: 60% 40%; /* 3:2 ratio for better text space */
   gap: var(--space-xl);
   align-items: end; 
   width: 100%;
@@ -166,9 +166,10 @@
 
 .title-line {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 8rem);
+  font-size: clamp(3rem, 8vw, 6.5rem); /* Reduced to fit in 40% column */
   font-weight: 900;
-  letter-spacing: 15px; /* Maximum spacing for cinematic look */
+  letter-spacing: 15px; 
+  margin-right: -15px; /* Offset trailing space for center alignment */
   display: block;
   background-size: 200% auto;
   -webkit-background-clip: text;
