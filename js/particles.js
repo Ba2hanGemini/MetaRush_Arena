@@ -11,8 +11,8 @@ class ParticleSystem {
     this.ctx = this.canvas.getContext('2d');
     this.particles = [];
     this.mouse = { x: -1000, y: -1000 };
-    this.particleCount = 80;
-    this.connectionDistance = 150;
+    this.particleCount = 45;
+    this.connectionDistance = 110;
     this.mouseRadius = 200;
 
     this.colors = [
