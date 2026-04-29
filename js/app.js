@@ -55,6 +55,7 @@ class MetaRushApp {
     this.setupMagneticButtons();
     this.setupLeaderboardTabs();
     this.setupTournaments();
+    this.preloadHeroVideo(); // New: Load once to memory for smooth loop
 
     /* Live competition timers */
     if (window.competitionManager) {
@@ -1125,6 +1126,34 @@ class MetaRushApp {
     m.classList.add('active');
     document.body.style.overflow = 'hidden';
     document.getElementById('tourn-modal-close')?.focus();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     HERO VIDEO PRELOADER — Load once to memory (Blob URL)
+     Ensures smooth loop and no repeated network requests.
+     ══════════════════════════════════════════════════════ */
+  async preloadHeroVideo() {
+    const video = document.querySelector('.hero-video-bg');
+    if (!video) return;
+
+    // Use the primary source from index.html
+    const videoSrc = video.querySelector('source')?.src || "https://res.cloudinary.com/metarush/video/upload/hero_bg.mp4";
+
+    try {
+      const response = await fetch(videoSrc);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      // Apply the local Blob URL to the video element
+      video.src = blobUrl;
+      video.load();
+      video.play().catch(e => console.warn("Auto-play blocked, waiting for interaction."));
+
+      console.log("Hero video preloaded into memory successfully.");
+    } catch (error) {
+      console.error("Video preloading failed:", error);
+      // Fallback: the video will still try to load via native src if preloading fails
+    }
   }
 
 
