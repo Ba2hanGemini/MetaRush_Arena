@@ -50,14 +50,15 @@
 
 .hero-main-grid {
   display: grid;
-  grid-template-columns: 60% 40%; /* 3:2 ratio for better text space */
+  grid-template-columns: 60% 40%; 
   gap: var(--space-xl);
   align-items: end; 
   width: 100%;
+  padding: 0 var(--space-4xl); /* Edge safety for full-width */
 }
 
 .hero-stats-col {
-  padding-bottom: 10px;
+  padding-bottom: 15px; /* Aligned with center of buttons */
   display: flex;
   justify-content: flex-start; /* Ground stats on the left */
 }

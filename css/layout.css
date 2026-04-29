@@ -6,8 +6,8 @@
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 48px);
-  max-width: 1180px;
+  width: calc(100% - 40px);
+  max-width: none; /* Full width as requested */
   height: 62px;
   z-index: 1000;
   display: flex;
