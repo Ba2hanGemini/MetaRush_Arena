@@ -50,24 +50,27 @@
 
 .hero-main-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr; /* 3:2 Ratio (Total 5 parts: 3/5 left, 2/5 right) */
-  gap: var(--space-4xl);
-  align-items: end; /* Align items at the bottom of their respective cells */
+  grid-template-columns: 65% 35%; /* More distinct split to avoid 50/50 feel */
+  gap: var(--space-xl);
+  align-items: end; 
   width: 100%;
 }
 
 .hero-stats-col {
-  padding-bottom: 10px; /* Aligned with buttons */
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: flex-start; /* Ground stats on the left */
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  text-align: center; /* Center all text and elements within this div */
+  text-align: center; 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Center content horizontally within the 35% col */
+  justify-content: center;
 }
 
 /* Eyebrow — status chip (Now Floating Globally) */
@@ -229,7 +232,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
   max-width: 680px;
-  margin: 0 auto; /* Center within column */
+  margin: 0; /* Align to the start of the column */
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.4s both;
 }
 
