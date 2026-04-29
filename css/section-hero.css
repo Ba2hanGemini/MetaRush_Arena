@@ -72,7 +72,7 @@
   flex-direction: column;
   align-items: center; 
   justify-content: center;
-  transform: translateY(40px); /* Shifted down further as requested */
+  transform: translateY(50px); /* Final shift down as requested */
 }
 
 /* Eyebrow — status chip (Now Floating Globally) */
