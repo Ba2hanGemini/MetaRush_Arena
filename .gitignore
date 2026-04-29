@@ -1,0 +1,14 @@
+# METARUSH Git Ignore
+.agent/
+.gemini/
+.vscode/
+node_modules/
+Thumbs.db
+.DS_Store
+
+# Scripts
+append_prompts*.ps1
+generate_pollinations.py
+olusturulan_gorseller.txt
+PROMPTS_ARCHIVE.md
+indices.json

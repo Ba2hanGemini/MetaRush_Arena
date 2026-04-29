@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>METARUSH — Web3 Competition & Loot Box Arena</title>
+  <meta name="description" content="METARUSH is the premier Web3 competition platform. Enter ETH vs ETH and SOL vs SOL PvP arenas, open provably fair loot boxes, and claim rewards on-chain.">
+  <meta name="keywords" content="Web3, crypto, ETH, SOL, competition, loot box, provably fair, blockchain, DeFi">
+  <meta name="theme-color" content="#06060e">
+  <meta property="og:title" content="METARUSH — Web3 Competition Arena">
+  <meta property="og:description" content="The premier Web3 competition platform. ETH vs ETH, SOL vs SOL — provably fair.">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/section-hero.css">
+  <link rel="stylesheet" href="css/section-competitions.css">
+  <link rel="stylesheet" href="css/section-tournaments.css">
+  <link rel="stylesheet" href="css/section-lootbox.css">
+  <link rel="stylesheet" href="css/section-leaderboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c3aed'/><stop offset='100%25' stop-color='%2306b6d4'/></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23g)'/><text y='.85em' x='50%25' text-anchor='middle' font-size='60'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- ── Noise Texture Overlay ── -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ── Particle Canvas ── -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ── Ambient Orbs ── -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING GLASS PILL NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <header class="header" id="header" role="banner">
+    <div class="header-inner">
+      <!-- Logo -->
+      <a href="#hero" class="logo" id="logo" aria-label="METARUSH Home">
+        <div class="logo-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M11 2L19 7V15L11 20L3 15V7L11 2Z" stroke="url(#hex-grad)" stroke-width="1.5" fill="rgba(124,58,237,0.15)"/>
+            <path d="M11 5L16 8V14L11 17L6 14V8L11 5Z" fill="url(#hex-grad)" opacity="0.6"/>
+            <defs>
+              <linearGradient id="hex-grad" x1="0" y1="0" x2="22" y2="22">
+                <stop offset="0%" stop-color="#7c3aed"/>
+                <stop offset="100%" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">META<span class="logo-accent">RUSH</span></span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav" id="main-nav" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link active" data-section="hero">Arena</a>
+        <a href="#competitions" class="nav-link" data-section="competitions">Compete</a>
+        <a href="#lootboxes" class="nav-link" data-section="lootboxes">Loot</a>
+        <a href="#tournaments" class="nav-link" data-section="tournaments">Turnuvalar</a>
+        <a href="#leaderboard" class="nav-link" data-section="leaderboard">Rankings</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <div class="wallet-address-display" id="wallet-address-display" aria-live="polite">
+          <span class="wallet-dot"></span>
+          <span id="wallet-addr-text"></span>
+        </div>
+        <div class="balance-display" id="balance-display" aria-live="polite">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="6" stroke="#10b981" stroke-width="1.2"/>
+            <path d="M5 7h4M7 5v4" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span id="balance-amount">0.00 ETH</span>
+        </div>
+        <button class="btn btn-wallet" id="connect-wallet-btn" aria-label="Connect Crypto Wallet">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="1" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M1 7h14" stroke="currentColor" stroke-width="1.3"/>
+            <circle cx="11" cy="10" r="1.2" fill="currentColor"/>
+          </svg>
+          Connect
+        </button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         ATTENTION — HERO (Cinematic Center)
+         ═══════════════════════════════════════════ -->
+    <section class="hero section section-16-9-bg bg-hero" id="hero" aria-labelledby="hero-heading">
+      <!-- Video Background -->
+      <div class="hero-video-container" aria-hidden="true">
+        <video class="hero-video-bg" autoplay loop muted playsinline poster="assets/images/hero_bg.jpeg">
+          <source src="assets/images/hero_bg.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="warm-overlay" aria-hidden="true"></div>
+      <div class="hero-bg-mesh" aria-hidden="true">
+        <div class="mesh-grid"></div>
+      </div>
+
+      <div class="container hero-content">
+        <!-- Main Title -->
+
+        <h1 class="hero-title orbis-title" id="hero-heading">
+          <span class="title-line title-line-1">COMPETE.</span>
+          <span class="title-line title-line-2">WIN.</span>
+          <span class="title-line title-line-3">COLLECT.</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          Enter PvP arenas, battle <strong>ETH vs ETH</strong> and <strong>SOL vs SOL</strong>,
+          open provably fair loot boxes — all powered by Chainlink VRF on-chain.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-actions">
+          <a href="#competitions" class="btn btn-primary btn-lg hero-cta-primary" data-section="competitions" id="hero-arena-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M9 2L15 9L9 16M3 9h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Enter Arena
+          </a>
+          <a href="#lootboxes" class="btn btn-ghost btn-lg" data-section="lootboxes" id="hero-loot-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <rect x="2" y="7" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M6 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M9 10v3M7.5 11.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Open Loot Box
+          </a>
+        </div>
+
+        <!-- Live Stats -->
+        <div class="hero-stats" role="list" aria-label="Platform Statistics">
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-value" aria-label="Total Prize Pool">
+              <span data-count-to="156.8" data-decimals="1">0</span>
+              <span class="stat-unit">ETH</span>
+            </div>
+            <div class="hero-stat-label">Total Prize Pool</div>
+            <div class="stat-bar"><span class="stat-bar-fill" style="width:78%"></span></div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-value" aria-label="Active Competitions">
+              <span data-count-to="24" data-decimals="0">0</span>
+            </div>
+            <div class="hero-stat-label">Active Competitions</div>
+            <div class="stat-bar"><span class="stat-bar-fill" style="width:60%"></span></div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-value" aria-label="Total Players">
+              <span data-count-to="12847" data-decimals="0">0</span><span class="stat-unit">+</span>
+            </div>
+            <div class="hero-stat-label">Total Players</div>
+            <div class="stat-bar"><span class="stat-bar-fill" style="width:92%"></span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TRUST MARQUEE
+         ═══════════════════════════════════════════ -->
+    <div class="marquee-section" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="#10b981"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Provably Fair
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.4 4.3 12.3l.7-4.1-3-2.9 4.2-.7z" stroke="#f59e0b" stroke-width="1" fill="rgba(245,158,11,0.2)"/></svg>
+            Chainlink VRF
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="2" stroke="#627eea" stroke-width="1"/><circle cx="10" cy="8" r="1.3" fill="#627eea"/></svg>
+            ETH Mainnet
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#9945ff" stroke-width="1"/><path d="M5 8h6M8 5l3 3-3 3" stroke="#9945ff" stroke-width="1" stroke-linecap="round"/></svg>
+            Solana
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="#06b6d4" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Base Chain
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8a5 5 0 0110 0" stroke="#7c3aed" stroke-width="1" stroke-linecap="round"/><circle cx="8" cy="11" r="2.5" stroke="#7c3aed" stroke-width="1"/></svg>
+            Non-Custodial
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14s-6-3.5-6-8a6 6 0 0112 0c0 4.5-6 8-6 8z" stroke="#10b981" stroke-width="1" fill="rgba(16,185,129,0.1)"/></svg>
+            Smart Contracts
+          </span>
+          <!-- Duplicate for seamless loop -->
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="#10b981"><circle cx="8" cy="8" r="7" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#10b981" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>
+            Provably Fair
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.4 4.3 12.3l.7-4.1-3-2.9 4.2-.7z" stroke="#f59e0b" stroke-width="1" fill="rgba(245,158,11,0.2)"/></svg>
+            Chainlink VRF
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="2" stroke="#627eea" stroke-width="1"/><circle cx="10" cy="8" r="1.3" fill="#627eea"/></svg>
+            ETH Mainnet
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#9945ff" stroke-width="1"/><path d="M5 8h6M8 5l3 3-3 3" stroke="#9945ff" stroke-width="1" stroke-linecap="round"/></svg>
+            Solana
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="#06b6d4" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Base Chain
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8a5 5 0 0110 0" stroke="#7c3aed" stroke-width="1" stroke-linecap="round"/><circle cx="8" cy="11" r="2.5" stroke="#7c3aed" stroke-width="1"/></svg>
+            Non-Custodial
+          </span>
+          <span class="marquee-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 14s-6-3.5-6-8a6 6 0 0112 0c0 4.5-6 8-6 8z" stroke="#10b981" stroke-width="1" fill="rgba(16,185,129,0.1)"/></svg>
+            Smart Contracts
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         INTEREST — LIVE COMPETITIONS
+         ═══════════════════════════════════════════ -->
+    <section class="section section-16-9-bg bg-pvp" id="competitions" aria-labelledby="comp-heading">
+      <div class="warm-overlay" aria-hidden="true"></div>
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow orbis-accent">
+            <span class="eyebrow-dot live-dot" aria-hidden="true"></span>
+            Live Now
+          </div>
+          <h2 class="section-title orbis-title" id="comp-heading">PvP Arenas</h2>
+          <p class="section-subtitle">
+            Enter the arena and compete head-to-head. Winners selected via Chainlink VRF — provably fair, fully on-chain.
+          </p>
+        </div>
+
+        <!-- Competition Filter Tabs -->
+        <div class="filter-tabs" role="tablist" aria-label="Competition Filters">
+          <button class="filter-tab active" role="tab" aria-selected="true" data-filter="all">All Chains</button>
+          <button class="filter-tab" role="tab" aria-selected="false" data-filter="eth">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l4 6-4 2-4-2 4-6z" fill="#627eea" opacity="0.8"/><path d="M7 9l4-1.5-4 5-4-5L7 9z" fill="#627eea"/></svg>
+            ETH
+          </button>
+          <button class="filter-tab" role="tab" aria-selected="false" data-filter="sol">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 5h9l-1 1.5H3L2 5zM2 8h8l1 1.5H3L2 8z" fill="#9945ff"/></svg>
+            SOL
+          </button>
+          <button class="filter-tab" role="tab" aria-selected="false" data-filter="base">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="#0052ff" stroke-width="1.2"/><circle cx="7" cy="7" r="2.5" fill="#0052ff"/></svg>
+            Base
+          </button>
+        </div>
+
+        <div class="competitions-grid" id="competitions-grid" role="list" aria-label="Active Competitions">
+          <!-- Rendered by competitions.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         DESIRE — LOOT BOX SECTION
+         ═══════════════════════════════════════════ -->
+    <section class="section section-loot section-16-9-bg bg-lootbox" id="lootboxes" aria-labelledby="loot-heading">
+      <div class="warm-overlay" aria-hidden="true"></div>
+      <!-- Diagonal separator -->
+      <div class="section-divider" aria-hidden="true"></div>
+
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow orbis-accent">Provably Fair Rewards</div>
+          <h2 class="section-title orbis-title" id="loot-heading">Loot Boxes</h2>
+          <p class="section-subtitle">
+            Choose your tier, open the box, discover your reward. From Common to Legendary — every box holds a surprise.
+          </p>
+        </div>
+
+        <!-- Rarity legend -->
+        <div class="rarity-legend" aria-label="Rarity Tiers">
+          <span class="rarity-pill common">Common</span>
+          <span class="rarity-pill uncommon">Uncommon</span>
+          <span class="rarity-pill rare">Rare</span>
+          <span class="rarity-pill epic">Epic</span>
+          <span class="rarity-pill legendary">Legendary</span>
+        </div>
+
+        <div class="lootbox-grid" id="lootbox-grid" role="list" aria-label="Available Loot Boxes">
+          <!-- Rendered by lootbox.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TOURNAMENT ARENA SECTION
+         ═══════════════════════════════════════════ -->
+    <section class="section section-tournament section-16-9-bg bg-arena" id="tournaments" aria-labelledby="tourn-heading">
+      <div class="warm-overlay" aria-hidden="true"></div>
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow orbis-accent">
+            <span class="eyebrow-dot live-dot" aria-hidden="true"></span>
+            Multi-Player Modes
+          </div>
+          <h2 class="section-title orbis-title" id="tourn-heading">Tournament Arena</h2>
+          <p class="section-subtitle">
+            1v1, 2v2 veya 4v4 formatında rakiplerinle karşılaş. Kazananlar potun tamamını alır, sadece kârından %5 platform ücreti kesilir.
+          </p>
+        </div>
+
+        <!-- ── Payout Calculator Card ── -->
+        <div class="tourn-calculator glass-card" aria-label="Ödül Hesaplayıcı">
+          <div class="tourn-calc-header">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="14" height="14" rx="3" stroke="var(--accent-cyan)" stroke-width="1.4"/>
+              <path d="M5 9h8M9 5v8" stroke="var(--accent-cyan)" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span>Canlı Ödül Hesaplayıcı</span>
+          </div>
+
+          <div class="tourn-calc-body">
+            <!-- Mode Selector -->
+            <div class="calc-field-group">
+              <label class="calc-label">Turnuva Modu</label>
+              <div class="tourn-mode-selector" role="radiogroup" aria-label="Turnuva modu seç">
+                <button class="tourn-mode-btn active" data-mode="1v1" role="radio" aria-checked="true">
+                  <span class="mode-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="7" cy="7" r="4" stroke="currentColor" stroke-width="1.4"/>
+                      <circle cx="13" cy="7" r="4" stroke="currentColor" stroke-width="1.4"/>
+                      <path d="M5 16c0-2.2 1.8-4 4-4h2c2.2 0 4 1.8 4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="mode-label">1 vs 1</span>
+                  <span class="mode-sub">Bireysel</span>
+                </button>
+                <button class="tourn-mode-btn" data-mode="2v2" role="radio" aria-checked="false">
+                  <span class="mode-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="5" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/>
+                      <circle cx="15" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/>
+                      <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/>
+                      <path d="M2 16c0-2 1.6-3.5 3.5-3.5h9c2 0 3.5 1.5 3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="mode-label">2 vs 2</span>
+                  <span class="mode-sub">Takım (4 kişi)</span>
+                </button>
+                <button class="tourn-mode-btn" data-mode="4v4" role="radio" aria-checked="false">
+                  <span class="mode-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="4"  cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                      <circle cx="10" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                      <circle cx="16" cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                      <circle cx="7"  cy="5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+                      <path d="M1 16c0-2 1.4-3.5 3-3.5h12c1.6 0 3 1.5 3 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="mode-label">4 vs 4</span>
+                  <span class="mode-sub">Takım (8 kişi)</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="calc-row-2col">
+              <!-- Coin Selector -->
+              <div class="calc-field-group">
+                <label class="calc-label" for="tourn-coin">Kripto Para</label>
+                <div class="tourn-coin-selector" role="radiogroup" aria-label="Kripto para seç">
+                  <button class="tourn-coin-btn active" data-coin="ETH" role="radio" aria-checked="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1l3.5 5-3.5 1.5L3.5 6 7 1z" fill="#627eea" opacity=".9"/><path d="M7 8l3.5-1.5L7 13 3.5 6.5 7 8z" fill="#627eea"/></svg>
+                    ETH
+                  </button>
+                  <button class="tourn-coin-btn" data-coin="SOL" role="radio" aria-checked="false">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 4h9l-1 1.5H3L2 4zM2 7h8l1 1.5H3L2 7z" fill="#9945ff"/></svg>
+                    SOL
+                  </button>
+                  <button class="tourn-coin-btn" data-coin="AVAX" role="radio" aria-checked="false">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2L12 11H2L7 2z" stroke="#e84142" stroke-width="1.2" fill="rgba(232,65,66,0.15)"/></svg>
+                    AVAX
+                  </button>
+                  <button class="tourn-coin-btn" data-coin="BNB" role="radio" aria-checked="false">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="7" y="2" width="4" height="4" transform="rotate(45 7 2)" fill="#f3ba2f"/><rect x="7" y="8" width="4" height="4" transform="rotate(45 7 8)" fill="#f3ba2f"/></svg>
+                    BNB
+                  </button>
+                  <button class="tourn-coin-btn" data-coin="TRX" role="radio" aria-checked="false">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2l10 5-5 1-5 6V2z" fill="#ef0027" opacity=".8"/></svg>
+                    TRX
+                  </button>
+                </div>
+              </div>
+
+              <!-- Entry Amount -->
+              <div class="calc-field-group">
+                <label class="calc-label" for="tourn-entry-input">Kişi Başı Giriş Miktarı</label>
+                <div class="tourn-entry-input-wrap">
+                  <input
+                    type="number"
+                    id="tourn-entry-input"
+                    class="tourn-entry-input"
+                    value="1"
+                    min="0.001"
+                    step="0.1"
+                    aria-label="Giriş miktarı"
+                  />
+                  <span class="tourn-entry-coin-label" id="entry-coin-label">ETH</span>
+                </div>
+                <div class="quick-amounts" role="group" aria-label="Hızlı seçim">
+                  <button class="quick-amt" data-amount="0.1">0.1</button>
+                  <button class="quick-amt" data-amount="0.5">0.5</button>
+                  <button class="quick-amt active" data-amount="1">1</button>
+                  <button class="quick-amt" data-amount="5">5</button>
+                  <button class="quick-amt" data-amount="10">10</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payout Breakdown -->
+            <div class="tourn-payout-panel" id="tourn-payout-panel" aria-live="polite" aria-label="Ödül hesaplama sonucu">
+              <div class="payout-row">
+                <span class="payout-label">Toplam Pot</span>
+                <span class="payout-value" id="payout-total-pot">2.0000 ETH</span>
+              </div>
+              <div class="payout-row">
+                <span class="payout-label">Kişi Başı Brüt Kazanç</span>
+                <span class="payout-value" id="payout-gross">2.0000 ETH</span>
+              </div>
+              <div class="payout-row payout-fee-row">
+                <span class="payout-label">%5 Platform Ücreti (yalnızca kâr üzerinden)</span>
+                <span class="payout-value payout-fee" id="payout-fee">-0.0500 ETH</span>
+              </div>
+              <div class="payout-divider"></div>
+              <div class="payout-row payout-net-row">
+                <span class="payout-label payout-net-label">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <circle cx="7" cy="7" r="6" stroke="var(--accent-green)" stroke-width="1.2"/>
+                    <path d="M4.5 7l1.8 2 3.2-4" stroke="var(--accent-green)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Kazanana Net Ödeme
+                </span>
+                <span class="payout-value payout-net" id="payout-net">1.9500 ETH</span>
+              </div>
+              <div class="payout-row" style="margin-top:var(--space-sm)">
+                <span class="payout-label" style="color:var(--text-muted);font-size:var(--text-xs)">Platform Geliri</span>
+                <span class="payout-value" style="color:var(--text-muted);font-size:var(--text-xs)" id="payout-platform">0.0500 ETH</span>
+              </div>
+              <div class="payout-meta" id="payout-meta">
+                <span id="payout-meta-text">1 kazanan · 2 toplam oyuncu · %5 fee kârdan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Active Tournaments Grid ── -->
+        <div class="tourn-grid-header">
+          <h3 class="tourn-grid-title">Aktif Turnuvalar</h3>
+          <div class="tourn-grid-filters" role="tablist" aria-label="Turnuva modu filtresi">
+            <button class="tourn-filter-btn active" role="tab" aria-selected="true" data-tourn-filter="all">Tümü</button>
+            <button class="tourn-filter-btn" role="tab" aria-selected="false" data-tourn-filter="1v1">1v1</button>
+            <button class="tourn-filter-btn" role="tab" aria-selected="false" data-tourn-filter="2v2">2v2</button>
+            <button class="tourn-filter-btn" role="tab" aria-selected="false" data-tourn-filter="4v4">4v4</button>
+          </div>
+        </div>
+
+        <div class="tournaments-grid" id="tournaments-grid" role="list" aria-label="Aktif turnuvalar">
+          <!-- Rendered by app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         DESIRE — LEADERBOARD
+         ═══════════════════════════════════════════ -->
+    <section class="section section-16-9-bg bg-leaderboard" id="leaderboard" aria-labelledby="lb-heading">
+      <div class="warm-overlay" aria-hidden="true"></div>
+      <div class="container">
+
+        <div class="section-header">
+          <div class="section-eyebrow orbis-accent">Hall of Champions</div>
+          <h2 class="section-title orbis-title" id="lb-heading">Leaderboard</h2>
+          <p class="section-subtitle">
+            The top competitors across all arenas. Climb the ranks and earn your place among legends.
+          </p>
+        </div>
+
+        <div class="leaderboard-card glass-card">
+          <div class="leaderboard-toolbar">
+            <div class="lb-period-tabs" role="tablist" aria-label="Leaderboard Period">
+              <button class="lb-tab active" role="tab" aria-selected="true">All Time</button>
+              <button class="lb-tab" role="tab" aria-selected="false">This Week</button>
+              <button class="lb-tab" role="tab" aria-selected="false">Today</button>
+            </div>
+            <div class="lb-live-indicator" aria-live="polite">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Updating live
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="leaderboard-table" id="leaderboard-table" aria-label="Player Rankings">
+              <thead>
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Wallet</th>
+                  <th scope="col">Wins</th>
+                  <th scope="col">Total Earned</th>
+                  <th scope="col">Win Rate</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-body">
+                <!-- Rendered by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ACTION — PRE-FOOTER CTA BAND
+         ═══════════════════════════════════════════ -->
+    <section class="cta-band" aria-label="Call to Action">
+      <div class="container">
+        <div class="cta-band-inner">
+          <div class="cta-band-copy">
+            <h2 class="cta-band-title">Ready to Compete?</h2>
+            <p class="cta-band-sub">Connect your wallet and enter the arena in under 60 seconds.</p>
+          </div>
+          <div class="cta-band-actions">
+            <button class="btn btn-primary btn-xl" id="cta-connect-btn" aria-label="Connect Wallet to Start">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <rect x="1" y="4" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M1 8h16" stroke="currentColor" stroke-width="1.4"/>
+                <circle cx="13" cy="12" r="1.5" fill="currentColor"/>
+              </svg>
+              Connect Wallet
+            </button>
+            <a href="#competitions" class="btn btn-outline btn-xl" data-section="competitions">
+              Browse Arenas
+            </a>
+          </div>
+        </div>
+        <!-- Decorative line -->
+        <div class="cta-band-line" aria-hidden="true"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       ACTION — FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="logo footer-logo" aria-label="METARUSH">
+            <div class="logo-mark" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M11 2L19 7V15L11 20L3 15V7L11 2Z" stroke="url(#f-hex)" stroke-width="1.5" fill="rgba(124,58,237,0.15)"/>
+                <path d="M11 5L16 8V14L11 17L6 14V8L11 5Z" fill="url(#f-hex)" opacity="0.5"/>
+                <defs>
+                  <linearGradient id="f-hex" x1="0" y1="0" x2="22" y2="22">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#06b6d4"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="logo-text">META<span class="logo-accent">RUSH</span></span>
+          </div>
+          <p>The premier Web3 competition platform. Provably fair, fully transparent, powered by smart contracts on Ethereum and Solana.</p>
+          <div class="footer-socials" aria-label="Social Media Links">
+            <a href="#" aria-label="METARUSH on Twitter/X" class="social-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M14 3H16.5L11 9.6L17.5 17H12.3L8.3 11.7L3.7 17H1.2L7.1 10L1 3H6.3L9.9 7.8L14 3Z" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="METARUSH Discord" class="social-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M12 3.5c-.8-.4-1.6-.6-2.5-.7L9 3.3C8.4 4.4 8 5.5 7.5 6.7 6.5 6.5 5.4 6.5 4.5 6.7 4 5.5 3.6 4.4 3 3.3l-.5.5C1.7 4.6 1.2 5.7 1 7c1.2.5 2 1.5 2 2.5 0 1 0 2 .5 2.5C5 12.5 6.5 13 9 13s4-.5 5.5-1c.5-.5.5-1.5.5-2.5 0-1 .8-2 2-2.5-.2-1.3-.7-2.4-1.5-3.2l-.5-.3zm-7 6c-.8 0-1.5-.7-1.5-1.5S4.2 6.5 5 6.5s1.5.7 1.5 1.5S5.8 9.5 5 9.5zm8 0c-.8 0-1.5-.7-1.5-1.5S12.2 6.5 13 6.5s1.5.7 1.5 1.5-.7 1.5-1.5 1.5z" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="METARUSH Telegram" class="social-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1a8 8 0 100 16A8 8 0 009 1zm4 5l-1.8 8.5c-.1.5-.5.7-.9.4l-2.5-1.9-1.2 1.1c-.1.1-.3.2-.5.2l.2-2.6 4.7-4.2c.2-.2 0-.3-.3-.1L5 11.4 2.6 10.7c-.5-.2-.5-.5.1-.7l9.4-3.6c.5-.2.9.1.9.6z" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="METARUSH GitHub" class="social-link">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 1a8 8 0 00-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.7 4 .3.3.6.8.6 1.6v2.4c0 .2.1.5.5.4A8 8 0 009 1z" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-link-group">
+            <h3 class="footer-link-heading">Platform</h3>
+            <a href="#competitions" class="footer-link">Competitions</a>
+            <a href="#lootboxes" class="footer-link">Loot Boxes</a>
+            <a href="#leaderboard" class="footer-link">Leaderboard</a>
+          </div>
+          <div class="footer-link-group">
+            <h3 class="footer-link-heading">Resources</h3>
+            <a href="#" class="footer-link">Documentation</a>
+            <a href="#" class="footer-link">Smart Contracts</a>
+            <a href="#" class="footer-link">Provably Fair</a>
+            <a href="#" class="footer-link">Audit Report</a>
+          </div>
+          <div class="footer-link-group">
+            <h3 class="footer-link-heading">Community</h3>
+            <a href="#" class="footer-link">Discord</a>
+            <a href="#" class="footer-link">Twitter / X</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Ambassadors</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 METARUSH. All rights reserved. Built on Ethereum &amp; Solana.</span>
+        <div class="footer-badges" aria-label="Security Certifications">
+          <span class="footer-badge">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1L11 3.5V7c0 2.5-2.5 4-5 4S1 9.5 1 7V3.5L6 1z" stroke="#10b981" stroke-width="1" fill="rgba(16,185,129,0.1)"/></svg>
+            Audited
+          </span>
+          <span class="footer-badge">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="#06b6d4" stroke-width="1"/><path d="M4 6l1.5 1.5L8 4" stroke="#06b6d4" stroke-width="1" stroke-linecap="round"/></svg>
+            VRF Certified
+          </span>
+          <span class="footer-badge">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><rect x="1" y="3" width="10" height="7" rx="1.5" stroke="#7c3aed" stroke-width="1"/><path d="M4 3V2a2 2 0 014 0v1" stroke="#7c3aed" stroke-width="1" stroke-linecap="round"/></svg>
+            Non-Custodial
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       MODALS
+       ═══════════════════════════════════════════ -->
+
+  <!-- Wallet Connect Modal -->
+  <div class="modal-overlay" id="wallet-modal" role="dialog" aria-modal="true" aria-labelledby="wallet-modal-title">
+    <div class="modal modal-wallet">
+      <button class="modal-close" id="wallet-modal-close" aria-label="Close wallet modal">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="modal-eyebrow">Web3 Authentication</div>
+      <h3 class="modal-title" id="wallet-modal-title">Connect Wallet</h3>
+      <p class="modal-subtitle">Choose your wallet provider to continue</p>
+
+      <div class="wallet-options" role="list">
+        <button class="wallet-option" data-wallet="metamask" role="listitem" aria-label="Connect MetaMask">
+          <div class="wallet-option-icon metamask" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M24.5 2.5L15.2 9.4l1.7-4L24.5 2.5z" fill="#E17726"/>
+              <path d="M3.5 2.5l9.2 7-1.6-4L3.5 2.5z" fill="#E27625"/>
+              <path d="M21.1 19.3l-2.5 3.8 5.3 1.5 1.5-5.2-4.3-.1z" fill="#E27625"/>
+              <path d="M2.6 19.4l1.5 5.2 5.3-1.5-2.5-3.8-4.3.1z" fill="#E27625"/>
+              <path d="M9.1 12.2L7.7 14.4l5.3.2-.2-5.7L9.1 12.2z" fill="#E27625"/>
+              <path d="M18.9 12.2L15.7 8.8l-.1 5.8 5.3-.2L18.9 12.2z" fill="#E27625"/>
+              <path d="M9.4 23.1l3.2-1.5-2.7-2.1-.5 3.6z" fill="#E27625"/>
+              <path d="M15.4 21.6l3.2 1.5-.5-3.6-2.7 2.1z" fill="#E27625"/>
+            </svg>
+          </div>
+          <div class="wallet-option-info">
+            <span class="wallet-option-name">MetaMask</span>
+            <span class="wallet-option-desc">Browser extension</span>
+          </div>
+          <div class="wallet-option-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+        </button>
+
+        <button class="wallet-option" data-wallet="phantom" role="listitem" aria-label="Connect Phantom Wallet">
+          <div class="wallet-option-icon phantom" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="12" fill="url(#ph-bg)"/>
+              <path d="M8 14.5c0-3.3 2.7-6 6-6 2.5 0 4.6 1.5 5.5 3.7H18c-.8-1.5-2.3-2.5-4-2.5-2.5 0-4.5 2-4.5 4.8 0 1.5.6 2.8 1.5 3.7-.6-.1-1.1-.3-1.6-.6C8.8 17.2 8 15.9 8 14.5z" fill="white" opacity="0.9"/>
+              <path d="M14.5 10c2.5 0 4.5 2 4.5 4.5 0 2.3-1.7 4.1-3.9 4.4.6-.8 1-1.8 1-2.9 0-2.2-1.5-4-3.5-4.4.6-.9 1.4-1.6 1.9-1.6z" fill="white"/>
+              <defs><linearGradient id="ph-bg" x1="0" y1="0" x2="28" y2="28"><stop offset="0%" stop-color="#534BB1"/><stop offset="100%" stop-color="#551BF9"/></linearGradient></defs>
+            </svg>
+          </div>
+          <div class="wallet-option-info">
+            <span class="wallet-option-name">Phantom</span>
+            <span class="wallet-option-desc">Solana wallet</span>
+          </div>
+          <div class="wallet-option-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+        </button>
+
+        <button class="wallet-option" data-wallet="walletconnect" role="listitem" aria-label="Connect via WalletConnect">
+          <div class="wallet-option-icon walletconnect" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="12" fill="#3B99FC"/>
+              <path d="M8.3 11.5c3.1-3 8.3-3 11.4 0l.4.4c.2.2.2.4 0 .6l-1.3 1.3c-.1.1-.3.1-.4 0l-.5-.5c-2.2-2.1-5.6-2.1-7.8 0l-.5.5c-.1.1-.3.1-.4 0L8 12.5c-.2-.2-.2-.4 0-.6l.3-.4zm14.1 2.6l1.2 1.1c.2.2.2.4 0 .6l-5.2 5.1c-.2.2-.5.2-.7 0l-3.7-3.6c-.1-.1-.2-.1-.3 0l-3.7 3.6c-.2.2-.5.2-.7 0L4.1 15.8c-.2-.2-.2-.4 0-.6l1.2-1.1c.2-.2.5-.2.7 0l3.7 3.6c.1.1.2.1.3 0l3.7-3.6c.2-.2.5-.2.7 0l3.7 3.6c.1.1.2.1.3 0l3.7-3.6c.2-.2.5-.2.7 0z" fill="white"/>
+            </svg>
+          </div>
+          <div class="wallet-option-info">
+            <span class="wallet-option-name">WalletConnect</span>
+            <span class="wallet-option-desc">Scan QR with mobile</span>
+          </div>
+          <div class="wallet-option-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+        </button>
+      </div>
+
+      <div class="wallet-connecting" aria-live="assertive">
+        <div class="wallet-spinner" aria-hidden="true">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring spinner-ring-2"></div>
+        </div>
+        <p class="wallet-connecting-label">Connecting...</p>
+        <p class="wallet-connecting-sub">Confirm in your wallet</p>
+      </div>
+
+      <p class="modal-disclaimer">By connecting, you agree to our <a href="#">Terms of Service</a></p>
+    </div>
+  </div>
+
+  <!-- Competition Detail Modal -->
+  <div class="modal-overlay" id="competition-modal" role="dialog" aria-modal="true" aria-labelledby="comp-modal-title">
+    <div class="modal modal-comp">
+      <button class="modal-close" id="comp-modal-close" aria-label="Close competition modal">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="comp-detail-header">
+        <div class="comp-detail-badges">
+          <span class="comp-chain-badge comp-detail-chain-badge eth" id="modal-chain-badge">ETH</span>
+          <span class="comp-status live" id="modal-status-badge"><span class="status-dot" aria-hidden="true"></span>Live</span>
+        </div>
+        <h3 class="comp-detail-title" id="comp-modal-title">Competition Details</h3>
+      </div>
+
+      <div class="comp-detail-prize-row">
+        <div class="comp-detail-prize-block">
+          <div class="comp-prize-label">Prize Pool</div>
+          <div class="comp-detail-prize-value" id="modal-prize-value">0 ETH</div>
+        </div>
+        <div class="comp-detail-stats-mini">
+          <div>
+            <div class="comp-prize-label">Entry Fee</div>
+            <div class="comp-detail-stat-val" id="modal-entry-fee">—</div>
+          </div>
+          <div>
+            <div class="comp-prize-label">Players</div>
+            <div class="comp-detail-stat-val" id="modal-players">—</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="comp-detail-description" id="modal-description"></p>
+
+      <div class="comp-detail-participants">
+        <h4 class="comp-detail-participants-label">Recent Entries</h4>
+        <div class="participant-list" id="modal-participants" aria-label="Competition Participants">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg comp-enter-btn" id="comp-enter-btn" style="width:100%;" disabled aria-label="Enter Competition">
+        Connect Wallet to Enter
+      </button>
+
+      <div class="provably-fair-badge" role="note">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1L12 3.5V7c0 3-2.5 5-5 5S2 10 2 7V3.5L7 1z" stroke="#10b981" stroke-width="1" fill="rgba(16,185,129,0.1)"/></svg>
+        Provably Fair — Powered by Chainlink VRF
+      </div>
+    </div>
+  </div>
+
+  <!-- Loot Box Opening Modal -->
+  <div class="modal-overlay" id="lootbox-modal" role="dialog" aria-modal="true" aria-labelledby="loot-modal-title">
+    <div class="modal modal-loot">
+      <button class="modal-close" id="loot-modal-close" aria-label="Close loot box modal">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <h3 class="modal-title" id="loot-modal-title" style="text-align:center;">Opening Loot Box</h3>
+
+      <div class="lootbox-modal-content" aria-live="polite">
+        <div class="lootbox-opening-scene">
+          <div class="lootbox-glow-ring" aria-hidden="true"></div>
+          <div class="lootbox-opening-box" aria-hidden="true">
+            <div class="box-icon-wrap">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <rect x="8" y="28" width="48" height="28" rx="3" fill="rgba(124,58,237,0.2)" stroke="rgba(124,58,237,0.5)" stroke-width="1.5"/>
+                <rect x="8" y="22" width="48" height="10" rx="2" fill="rgba(124,58,237,0.3)" stroke="rgba(124,58,237,0.6)" stroke-width="1.5"/>
+                <path d="M28 22V56M36 22V56" stroke="rgba(124,58,237,0.4)" stroke-width="1.5"/>
+                <path d="M32 8l4 14H28L32 8z" fill="rgba(245,158,11,0.6)" stroke="rgba(245,158,11,0.8)" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p class="lootbox-opening-status">Shaking the box...</p>
+
+        <div class="lootbox-result" role="alert">
+          <div class="result-rarity-badge rarity-common" id="result-rarity">Common</div>
+          <div class="lootbox-result-amount" id="result-amount">0.01 ETH</div>
+          <div class="lootbox-result-label">You Won!</div>
+          <button class="btn btn-primary btn-lg" id="loot-collect-btn" style="margin-top: var(--space-lg);">
+            Collect &amp; Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tournament Join Modal -->
+  <div class="modal-overlay" id="tournament-modal" role="dialog" aria-modal="true" aria-labelledby="tourn-modal-title">
+    <div class="modal modal-tournament">
+      <button class="modal-close" id="tourn-modal-close" aria-label="Close tournament modal">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="comp-detail-header">
+        <div class="comp-detail-badges">
+          <span class="tourn-mode-badge" id="tourn-modal-mode-badge">1v1</span>
+          <span class="comp-status live" id="tourn-modal-status"><span class="status-dot" aria-hidden="true"></span>Open</span>
+        </div>
+        <h3 class="comp-detail-title" id="tourn-modal-title">Tournament Details</h3>
+      </div>
+
+      <div class="comp-detail-prize-row">
+        <div class="comp-detail-prize-block">
+          <div class="comp-prize-label">Toplam Pot</div>
+          <div class="comp-detail-prize-value" id="tourn-modal-pot">2.0000 ETH</div>
+        </div>
+        <div class="comp-detail-prize-block">
+          <div class="comp-prize-label">Net Ödeme (kazanana)</div>
+          <div class="comp-detail-prize-value" style="color:var(--accent-green)" id="tourn-modal-net">1.9500 ETH</div>
+        </div>
+        <div class="comp-detail-prize-block">
+          <div class="comp-prize-label">Kişi Başı Giriş</div>
+          <div class="comp-detail-prize-value" id="tourn-modal-entry">1.0000 ETH</div>
+        </div>
+      </div>
+
+      <div class="comp-detail-info-grid">
+        <div class="comp-info-item">
+          <span class="info-label">Mod</span>
+          <span class="info-value" id="tourn-modal-mode-text">1v1 Bireysel</span>
+        </div>
+        <div class="comp-info-item">
+          <span class="info-label">Kripto Para</span>
+          <span class="info-value" id="tourn-modal-coin">ETH</span>
+        </div>
+        <div class="comp-info-item">
+          <span class="info-label">Oyuncular</span>
+          <span class="info-value" id="tourn-modal-players">1 / 2</span>
+        </div>
+        <div class="comp-info-item">
+          <span class="info-label">Platform Fee</span>
+          <span class="info-value" style="color:var(--text-muted)">%5 (yalnızca kârdan)</span>
+        </div>
+      </div>
+
+      <!-- Fee breakdown pill -->
+      <div class="tourn-fee-breakdown">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+          <circle cx="6.5" cy="6.5" r="5.5" stroke="var(--accent-gold)" stroke-width="1"/>
+          <path d="M6.5 4v3M6.5 8.5v.5" stroke="var(--accent-gold)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span id="tourn-modal-fee-text">Kâr: 1.0000 ETH → %5 Fee: 0.0500 ETH → Net: 1.9500 ETH</span>
+      </div>
+
+      <div class="comp-detail-actions">
+        <button class="btn btn-primary btn-lg" id="tourn-join-btn" aria-label="Turnuvaya katıl">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2l5 5-5 5M2 7h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Turnuvaya Katıl
+        </button>
+        <button class="btn btn-ghost btn-lg" id="tourn-modal-cancel">
+          İptal
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confetti-container" aria-hidden="true"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ── Floating Status Badge ── -->
+  <div class="hero-eyebrow floating-status" aria-label="Platform Status">
+    <span class="eyebrow-dot" aria-hidden="true"></span>
+    <span>Live on Ethereum &amp; Solana</span>
+    <span class="eyebrow-sep" aria-hidden="true">—</span>
+    <span class="eyebrow-count" id="live-count">24 Active</span>
+  </div>
+
+  <!-- ── Scripts ── -->
+  <script src="js/particles.js"></script>
+  <script src="js/wallet.js"></script>
+  <script src="js/competitions.js"></script>
+  <script src="js/lootbox.js"></script>
+  <script src="js/tournaments.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
