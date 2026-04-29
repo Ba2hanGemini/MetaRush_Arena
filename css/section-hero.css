@@ -155,7 +155,7 @@
   font-family: var(--font-display);
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 900;
-  letter-spacing: 8px; /* Further increased spacing */
+  letter-spacing: 15px; /* Maximum spacing for cinematic look */
   display: block;
   background-size: 200% auto;
   -webkit-background-clip: text;
