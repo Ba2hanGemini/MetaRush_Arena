@@ -512,8 +512,9 @@
 }
 
 /* ── Section Title Theming ── */
+/* ── Section Title Theming ── */
 #competitions .section-title {
-  background: linear-gradient(135deg, #ff7e67 0%, #f472b6 50%, #ffb56b 100%);
+  background: var(--gradient-hero);
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -531,7 +532,7 @@
 }
 
 #leaderboard .section-title {
-  background: linear-gradient(135deg, #06b6d4, #10b981);
+  background: linear-gradient(135deg, #00f2fe, #4facfe); /* Premium Cyan-Blue */
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -541,6 +542,9 @@
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 2px;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.2rem); /* Slightly larger for impact */
+  line-height: 1.0;
 }
 .orbis-accent {
   font-family: var(--font-accent);

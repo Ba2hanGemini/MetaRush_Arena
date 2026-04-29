@@ -6,12 +6,12 @@
 .filter-tabs {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: var(--space-2xl);
   flex-wrap: wrap;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
   width: fit-content;
 }
@@ -19,79 +19,126 @@
 .filter-tab {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 10px;
+  padding: 10px 22px;
   border-radius: var(--radius-full);
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 44px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 46px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   position: relative;
-  overflow: hidden;
+  border: 2px solid transparent;
+  color: #ffffff !important;
+}
+
+/* ── Chain Filter Colors — Warm Orbis Palette Harmonized ── */
+
+/* All Chains — matches site's primary dark glass */
+.filter-tab[data-filter="all"] {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+.filter-tab[data-filter="all"]:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ETH — Warm slate-indigo (desaturated from #627eea) */
+.filter-tab[data-filter="eth"] {
+  background: rgba(88, 101, 163, 0.45);
+  border-color: rgba(98, 126, 234, 0.4);
+}
+.filter-tab[data-filter="eth"]:hover {
+  background: rgba(98, 126, 234, 0.55);
+}
+
+/* BNB — Deep amber-gold (from #f3ba2f, toned to fit warm palette) */
+.filter-tab[data-filter="bnb"] {
+  background: rgba(193, 148, 37, 0.4);
+  border-color: rgba(243, 186, 47, 0.4);
+}
+.filter-tab[data-filter="bnb"]:hover {
+  background: rgba(243, 186, 47, 0.5);
+}
+
+/* SOL — Deep violet (from #9945ff, already near palette) */
+.filter-tab[data-filter="sol"] {
+  background: rgba(120, 50, 200, 0.45);
+  border-color: rgba(153, 69, 255, 0.4);
+}
+.filter-tab[data-filter="sol"]:hover {
+  background: rgba(153, 69, 255, 0.55);
+}
+
+/* XRP — Desaturated cool charcoal (from #23292f) */
+.filter-tab[data-filter="xrp"] {
+  background: rgba(50, 55, 70, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.filter-tab[data-filter="xrp"]:hover {
+  background: rgba(70, 78, 95, 0.7);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* AVAX — Deep crimson-rose (from #e84142, warmed to match pink accent) */
+.filter-tab[data-filter="avax"] {
+  background: rgba(180, 50, 55, 0.45);
+  border-color: rgba(232, 65, 66, 0.4);
+}
+.filter-tab[data-filter="avax"]:hover {
+  background: rgba(232, 65, 66, 0.55);
+}
+
+/* TRX — Deep ruby (from #ef0027, warmed) */
+.filter-tab[data-filter="trx"] {
+  background: rgba(170, 10, 35, 0.45);
+  border-color: rgba(239, 0, 39, 0.4);
+}
+.filter-tab[data-filter="trx"]:hover {
+  background: rgba(239, 0, 39, 0.55);
 }
 
 .filter-tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Active State Defaults */
+/* Active State — Warm Glow */
 .filter-tab.active {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #ffffff;
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Chain Specific Active Colors */
-.filter-tab.active[data-filter="eth"] {
-  background: rgba(98, 126, 234, 0.15);
-  border-color: #627eea;
-  color: #627eea;
-  box-shadow: 0 0 20px rgba(98, 126, 234, 0.2);
-}
+.filter-tab.active[data-filter="all"]  { box-shadow: 0 0 18px rgba(255, 126, 103, 0.25); background: rgba(255, 126, 103, 0.15); border-color: rgba(255, 126, 103, 0.4); }
+.filter-tab.active[data-filter="eth"]  { box-shadow: 0 0 20px rgba(98, 126, 234, 0.4); background: rgba(98, 126, 234, 0.5); }
+.filter-tab.active[data-filter="bnb"]  { box-shadow: 0 0 20px rgba(243, 186, 47, 0.35); background: rgba(243, 186, 47, 0.45); }
+.filter-tab.active[data-filter="sol"]  { box-shadow: 0 0 20px rgba(153, 69, 255, 0.4); background: rgba(153, 69, 255, 0.5); }
+.filter-tab.active[data-filter="xrp"]  { box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); background: rgba(70, 78, 95, 0.65); }
+.filter-tab.active[data-filter="avax"] { box-shadow: 0 0 20px rgba(232, 65, 66, 0.4); background: rgba(232, 65, 66, 0.5); }
+.filter-tab.active[data-filter="trx"]  { box-shadow: 0 0 20px rgba(239, 0, 39, 0.35); background: rgba(239, 0, 39, 0.45); }
 
-.filter-tab.active[data-filter="bnb"] {
-  background: rgba(243, 186, 47, 0.15);
-  border-color: #f3ba2f;
-  color: #f3ba2f;
-  box-shadow: 0 0 20px rgba(243, 186, 47, 0.2);
+/* Force all icons to white monochrome */
+.filter-tab svg {
+  flex-shrink: 0;
 }
-
-.filter-tab.active[data-filter="sol"] {
-  background: rgba(153, 69, 255, 0.15);
-  border-color: #9945ff;
-  color: #9945ff;
-  box-shadow: 0 0 20px rgba(153, 69, 255, 0.2);
+.filter-tab svg polygon,
+.filter-tab svg path {
+  fill: white;
 }
-
-.filter-tab.active[data-filter="xrp"] {
-  background: rgba(35, 41, 47, 0.15);
-  border-color: #23292f;
-  color: #ffffff;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+/* Globe icon for 'All' uses stroke instead of fill */
+.filter-tab[data-filter="all"] svg {
+  stroke: white;
 }
-
-.filter-tab.active[data-filter="avax"] {
-  background: rgba(232, 65, 66, 0.15);
-  border-color: #e84142;
-  color: #e84142;
-  box-shadow: 0 0 20px rgba(232, 65, 66, 0.2);
-}
-
-.filter-tab.active[data-filter="trx"] {
-  background: rgba(239, 0, 39, 0.15);
-  border-color: #ef0027;
-  color: #ef0027;
-  box-shadow: 0 0 20px rgba(239, 0, 39, 0.2);
+.filter-tab[data-filter="all"] svg path,
+.filter-tab[data-filter="all"] svg circle,
+.filter-tab[data-filter="all"] svg line {
+  fill: none;
+  stroke: white;
 }
 
 /* Competitions Grid */

@@ -301,12 +301,18 @@ class MetaRushApp {
     const timeStr = window.competitionManager.formatTime(comp.endsIn);
 
     const chainSVG = {
-      eth:  `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l3.5 5-3.5 1.5L2.5 6 6 1z" fill="#627eea" opacity="0.9"/><path d="M6 8l3.5-1.5L6 12 2.5 6.5 6 8z" fill="#627eea"/></svg>`,
-      bnb:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l2 2-2 2-2-2 2-2zM4 4.5l2 2-2 2-2-2 2-2zM10 4.5l2 2-2 2-2-2 2-2zM7 7.5l2 2-2 2-2-2 2-2z" fill="#f3ba2f"/></svg>`,
-      sol:  `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4h7l-1 1.5H3L2 4zM2 7h6l1 1.5H3L2 7z" fill="#9945ff"/></svg>`,
-      xrp:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3L3 11" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg>`,
-      avax: `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 2l5 9H2l5-9z" fill="#e84142"/></svg>`,
-      trx:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 5-5 1-5 6V2z" fill="#ef0027"/></svg>`,
+      /* ETH — Official Ethereum Diamond */
+      eth:  `<svg width="12" height="18" viewBox="0 0 784 1277" fill="none"><polygon points="392,0 392,472 784,650" fill="#627eea" opacity=".8"/><polygon points="392,0 0,650 392,472" fill="#627eea" opacity=".6"/><polygon points="392,882 784,650 392,472" fill="#627eea" opacity=".9"/><polygon points="392,882 0,650 392,472" fill="#627eea" opacity=".7"/><polygon points="392,956 392,1277 784,724" fill="#627eea" opacity=".8"/><polygon points="392,1277 392,956 0,724" fill="#627eea" opacity=".6"/></svg>`,
+      /* BNB — Official Binance 4-Diamond + center */
+      bnb:  `<svg width="12" height="12" viewBox="0 0 80 80" fill="none"><path d="M40 8l12 12-12 12-12-12z" fill="#f3ba2f"/><path d="M16 32l12 12-12 12-12-12z" fill="#f3ba2f"/><path d="M64 32l12 12-12 12-12-12z" fill="#f3ba2f"/><path d="M40 56l12 12-12 12-12-12z" fill="#f3ba2f"/><path d="M40 32l8 8-8 8-8-8z" fill="#f3ba2f"/></svg>`,
+      /* SOL — Official Solana 3-bar Parallelogram */
+      sol:  `<svg width="14" height="11" viewBox="0 0 398 312" fill="none"><path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z" fill="#9945ff"/><path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" fill="#9945ff"/><path d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z" fill="#9945ff"/></svg>`,
+      /* XRP — Official Ripple X-shape */
+      xrp:  `<svg width="12" height="10" viewBox="0 0 512 424" fill="none"><path d="M437 0h74L357 152.48c-55.77 55.19-146.19 55.19-202 0L.94 0H75L192 115.83a91.11 91.11 0 0 0 127.91 0z" fill="#ffffff"/><path d="M74.05 424H0l155-153.42c55.77-55.19 146.19-55.19 202 0L512 424h-74L320 307.23a91.11 91.11 0 0 0-127.91 0z" fill="#ffffff"/></svg>`,
+      /* AVAX — Official Avalanche A-shape */
+      avax: `<svg width="12" height="12" viewBox="250 220 1000 870" fill="none"><path d="M538.688 1050.86H392.94c-30.626 0-45.754 0-54.978-5.9-9.963-6.46-16.051-17.16-16.789-28.97-.554-10.88 7.011-24.168 22.139-50.735L703.182 330.935c15.313-26.936 23.062-40.404 32.84-45.385 10.516-5.35 23.062-5.35 33.578 0 9.778 4.981 17.527 18.449 32.839 45.385l73.982 129.144.377.659c16.539 28.897 24.926 43.551 28.588 58.931 4.058 16.789 4.058 34.5 0 51.289-3.69 15.497-11.992 30.257-28.781 59.591L687.573 964.702l-.489.856c-16.648 29.135-25.085 43.901-36.778 55.042-12.73 12.18-28.043 21.03-44.832 26.02-15.313 4.24-32.47 4.24-66.786 4.24z" fill="#e84142"/><path d="M906.75 1050.86h208.84c30.81 0 46.31 0 55.54-6.08 9.96-6.46 16.23-17.35 16.79-29.15.53-10.53-7.37-23.3-21.87-48.323l-1.51-1.601-104.61-178.956-1.19-2.015c-14.7-24.858-22.12-37.411-31.65-42.263-10.51-5.351-22.88-5.351-33.391 0-9.594 4.981-17.342 18.08-32.655 44.462L857.306 964.891l-.357.616c-15.259 26.34-22.885 39.503-22.335 50.303.738 11.81 6.826 22.69 16.788 29.15 9.041 5.9 24.538 5.9 55.348 5.9z" fill="#e84142"/></svg>`,
+      /* TRX — Official TRON Arrow */
+      trx:  `<svg width="12" height="12" viewBox="0 0 64 64" fill="none"><path d="M61.55 19.28c-3-2.77-7.15-7-10.53-10l-.2-.14a3.82 3.82 0 0 0-1.11-.62C41.56 7 3.63-.09 2.89 0a1.4 1.4 0 0 0-.58.22l-.19.15a2.23 2.23 0 0 0-.52.84l-.05.13v.71C5.82 14.05 22.68 53 26 62.14c.2.62.58 1.8 1.29 1.86h.16c.38 0 2-2.14 2-2.14S58.41 26.74 61.34 23a9.46 9.46 0 0 0 1-1.48 2.41 2.41 0 0 0-.79-2.24zM36.88 23.37L49.24 13.12l7.25 6.68zM32.08 22.7L10.8 5.26l34.43 6.35zM34 27.27l21.78-3.51-24.9 30zM7.91 7L30.3 26 27.06 53.78z" fill="#ef0027"/></svg>`,
       base: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#4d8aff" stroke-width="1.2"/><circle cx="6" cy="6" r="2.2" fill="#4d8aff"/></svg>`,
     };
 
