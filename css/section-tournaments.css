@@ -506,9 +506,34 @@
 .warm-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(26,15,46,0.4) 0%, rgba(37,20,70,0.65) 100%);
+  background: linear-gradient(180deg, rgba(26,15,46,0.35) 0%, rgba(37,20,70,0.6) 100%);
   z-index: 0;
   pointer-events: none;
+}
+
+/* ── Section Title Theming ── */
+#competitions .section-title {
+  background: linear-gradient(135deg, #ff7e67 0%, #f472b6 50%, #ffb56b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#tournaments .section-title {
+  background: linear-gradient(135deg, #a78bfa, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#lootboxes .section-title {
+  background: linear-gradient(135deg, #f59e0b, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#leaderboard .section-title {
+  background: linear-gradient(135deg, #06b6d4, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 /* Typography Overrides for Orbis Style */
