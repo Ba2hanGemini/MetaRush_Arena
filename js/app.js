@@ -55,7 +55,7 @@ class MetaRushApp {
     this.setupMagneticButtons();
     this.setupLeaderboardTabs();
     this.setupTournaments();
-    this.setupHeroVideoLoop();
+    // this.setupHeroVideoLoop(); // Disabled to prevent freezing, relying on native loop attribute
 
     /* Live competition timers */
     if (window.competitionManager) {
