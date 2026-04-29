@@ -50,21 +50,24 @@
 
 .hero-main-grid {
   display: grid;
-  grid-template-columns: 5fr 3fr; /* 5:3 Ratio as requested */
+  grid-template-columns: 3fr 2fr; /* 3:2 Ratio (Total 5 parts: 3/5 left, 2/5 right) */
   gap: var(--space-4xl);
   align-items: end; /* Align items at the bottom of their respective cells */
   width: 100%;
 }
 
 .hero-stats-col {
-  padding-bottom: 5px; /* Fine-tune alignment with button bottom edges */
+  padding-bottom: 10px; /* Aligned with buttons */
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  text-align: right; /* Keep main content right-aligned */
+  text-align: center; /* Center all text and elements within this div */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Eyebrow — status chip (Now Floating Globally) */
