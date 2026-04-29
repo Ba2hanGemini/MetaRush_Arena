@@ -79,73 +79,75 @@ class ParticleSystem {
   update() {
     const time = Date.now() * 0.001;
 
-    for (const p of this.particles) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
       // Movement
       p.x += p.vx;
       p.y += p.vy;
 
-      // Pulse effect
-      p.radius = p.baseRadius + Math.sin(time * p.pulseSpeed * 10 + p.pulsePhase) * 0.5;
-      p.opacity = p.baseOpacity + Math.sin(time * p.pulseSpeed * 8 + p.pulsePhase) * 0.1;
+      // Pulse effect (optimized)
+      p.radius = p.baseRadius + Math.sin(time * 2 + p.pulsePhase) * 0.3;
+      p.opacity = p.baseOpacity + Math.sin(time * 1.5 + p.pulsePhase) * 0.05;
 
       // Screen wrap
-      if (p.x < -10) p.x = this.canvas.width + 10;
-      if (p.x > this.canvas.width + 10) p.x = -10;
-      if (p.y < -10) p.y = this.canvas.height + 10;
-      if (p.y > this.canvas.height + 10) p.y = -10;
+      if (p.x < -20) p.x = this.canvas.width + 20;
+      if (p.x > this.canvas.width + 20) p.x = -20;
+      if (p.y < -20) p.y = this.canvas.height + 20;
+      if (p.y > this.canvas.height + 20) p.y = -20;
 
-      // Mouse repulsion
+      // Mouse interaction (only if mouse is in range)
       const dx = this.mouse.x - p.x;
       const dy = this.mouse.y - p.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      const distSq = dx * dx + dy * dy;
 
-      if (dist < this.mouseRadius) {
+      if (distSq < this.mouseRadius * this.mouseRadius) {
+        const dist = Math.sqrt(distSq);
         const force = (this.mouseRadius - dist) / this.mouseRadius;
         const angle = Math.atan2(dy, dx);
-        p.x -= Math.cos(angle) * force * 1.5;
-        p.y -= Math.sin(angle) * force * 1.5;
-        // Brighten near mouse
-        p.opacity = Math.min(p.baseOpacity + force * 0.4, 0.8);
+        p.x -= Math.cos(angle) * force * 1.2;
+        p.y -= Math.sin(angle) * force * 1.2;
+        p.opacity = Math.min(p.baseOpacity + force * 0.3, 0.7);
       }
     }
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    const distLimitSq = this.connectionDistance * this.connectionDistance;
 
-    // Draw connections
+    // Draw connections (optimized batching)
+    this.ctx.lineWidth = 0.5;
     for (let i = 0; i < this.particles.length; i++) {
       for (let j = i + 1; j < this.particles.length; j++) {
         const a = this.particles[i];
         const b = this.particles[j];
         const dx = a.x - b.x;
         const dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const dSq = dx * dx + dy * dy;
 
-        if (dist < this.connectionDistance) {
-          const opacity = (1 - dist / this.connectionDistance) * 0.15;
+        if (dSq < distLimitSq) {
+          const opacity = (1 - Math.sqrt(dSq) / this.connectionDistance) * 0.12;
           this.ctx.beginPath();
           this.ctx.moveTo(a.x, a.y);
           this.ctx.lineTo(b.x, b.y);
           this.ctx.strokeStyle = `rgba(124, 58, 237, ${opacity})`;
-          this.ctx.lineWidth = 0.5;
           this.ctx.stroke();
         }
       }
     }
 
     // Draw particles
-    for (const p of this.particles) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity})`;
       this.ctx.fill();
 
-      // Glow effect for larger particles
-      if (p.radius > 1.5) {
+      if (p.radius > 1.6) {
         this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
-        this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity * 0.15})`;
+        this.ctx.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
+        this.ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.opacity * 0.12})`;
         this.ctx.fill();
       }
     }
