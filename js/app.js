@@ -55,7 +55,6 @@ class MetaRushApp {
     this.setupMagneticButtons();
     this.setupLeaderboardTabs();
     this.setupTournaments();
-    // this.setupHeroVideoLoop(); // Disabled to prevent freezing, relying on native loop attribute
 
     /* Live competition timers */
     if (window.competitionManager) {
@@ -1128,39 +1127,7 @@ class MetaRushApp {
     document.getElementById('tourn-modal-close')?.focus();
   }
 
-  /* ══════════════════════════════════════
-     HERO VIDEO LOOP — trim window (0.4s to end-1.0s)
-  ══════════════════════════════════════ */
-  setupHeroVideoLoop() {
-    const video = document.querySelector('.hero-video-bg');
-    if (!video) return;
 
-    /* 
-       AI videos often have glitches at the very start AND end.
-       Window: Skip first 0.4s and last 1.0s.
-    */
-    const startTrim   = 0.4;
-    const endTrim     = 1.0; 
-
-    // Ensure video starts at the trimmed position
-    video.addEventListener('loadedmetadata', () => {
-      video.currentTime = startTrim;
-    });
-
-    // In case metadata was already loaded
-    if (video.readyState >= 1) {
-      video.currentTime = startTrim;
-    }
-
-    video.addEventListener('timeupdate', () => {
-      if (video.duration > (startTrim + endTrim)) {
-        if (video.currentTime >= video.duration - endTrim) {
-          video.currentTime = startTrim;
-          video.play().catch(() => {});
-        }
-      }
-    });
-  }
 
 
 }
