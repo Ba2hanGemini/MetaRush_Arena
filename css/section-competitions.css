@@ -6,36 +6,92 @@
 .filter-tabs {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   margin-bottom: var(--space-2xl);
   flex-wrap: wrap;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  width: fit-content;
 }
 
 .filter-tab {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 44px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
 }
+
 .filter-tab:hover {
-  color: var(--text-primary);
-  border-color: var(--border-default);
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
+
+/* Active State Defaults */
 .filter-tab.active {
-  background: var(--accent-purple-dim);
-  border-color: var(--border-default);
-  color: var(--accent-purple-light);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Chain Specific Active Colors */
+.filter-tab.active[data-filter="eth"] {
+  background: rgba(98, 126, 234, 0.15);
+  border-color: #627eea;
+  color: #627eea;
+  box-shadow: 0 0 20px rgba(98, 126, 234, 0.2);
+}
+
+.filter-tab.active[data-filter="bnb"] {
+  background: rgba(243, 186, 47, 0.15);
+  border-color: #f3ba2f;
+  color: #f3ba2f;
+  box-shadow: 0 0 20px rgba(243, 186, 47, 0.2);
+}
+
+.filter-tab.active[data-filter="sol"] {
+  background: rgba(153, 69, 255, 0.15);
+  border-color: #9945ff;
+  color: #9945ff;
+  box-shadow: 0 0 20px rgba(153, 69, 255, 0.2);
+}
+
+.filter-tab.active[data-filter="xrp"] {
+  background: rgba(35, 41, 47, 0.15);
+  border-color: #23292f;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.filter-tab.active[data-filter="avax"] {
+  background: rgba(232, 65, 66, 0.15);
+  border-color: #e84142;
+  color: #e84142;
+  box-shadow: 0 0 20px rgba(232, 65, 66, 0.2);
+}
+
+.filter-tab.active[data-filter="trx"] {
+  background: rgba(239, 0, 39, 0.15);
+  border-color: #ef0027;
+  color: #ef0027;
+  box-shadow: 0 0 20px rgba(239, 0, 39, 0.2);
 }
 
 /* Competitions Grid */
@@ -120,15 +176,43 @@
   color: #627eea;
   border: 1px solid rgba(98,126,234,0.22);
 }
+.comp-chain-badge.bnb {
+  background: rgba(243,186,47,0.12);
+  color: #f3ba2f;
+  border: 1px solid rgba(243,186,47,0.22);
+}
 .comp-chain-badge.sol {
   background: rgba(153,69,255,0.12);
   color: #9945ff;
   border: 1px solid rgba(153,69,255,0.22);
 }
+.comp-chain-badge.xrp {
+  background: rgba(35,41,47,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.comp-chain-badge.avax {
+  background: rgba(232,65,66,0.12);
+  color: #e84142;
+  border: 1px solid rgba(232,65,66,0.22);
+}
+.comp-chain-badge.trx {
+  background: rgba(239,0,39,0.12);
+  color: #ef0027;
+  border: 1px solid rgba(239,0,39,0.22);
+}
 .comp-chain-badge.base {
   background: rgba(0,82,255,0.12);
   color: #4d8aff;
   border: 1px solid rgba(0,82,255,0.22);
+}
+
+.comp-chain-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
 }
 
 /* Status badges */

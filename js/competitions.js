@@ -22,10 +22,26 @@ class CompetitionManager {
         entryFee: 0.05,
         maxParticipants: 50,
         currentParticipants: 38,
-        endsIn: 3600 + Math.floor(Math.random() * 3600), // seconds
+        endsIn: 3600 + Math.floor(Math.random() * 3600),
         status: 'live',
         participants: this.generateParticipants(38, 'eth'),
         description: 'Classic Ethereum showdown. 50 players enter, one walks away with the prize pool.',
+      },
+      {
+        id: 'bnb-smart-001',
+        type: 'BNB Jackpot',
+        chain: 'bnb',
+        chainLabel: 'BSC',
+        prizePool: 15,
+        currency: 'BNB',
+        currencyIcon: 'BNB',
+        entryFee: 0.1,
+        maxParticipants: 100,
+        currentParticipants: 85,
+        endsIn: 2400 + Math.floor(Math.random() * 2000),
+        status: 'live',
+        participants: this.generateParticipants(85, 'bnb'),
+        description: 'High-speed BNB jackpot on BSC. Provably fair rewards.',
       },
       {
         id: 'sol-sprint-001',
@@ -44,6 +60,54 @@ class CompetitionManager {
         description: 'Fast-paced Solana sprint. Quick rounds, big rewards.',
       },
       {
+        id: 'xrp-ripple-001',
+        type: 'XRP Blitz',
+        chain: 'xrp',
+        chainLabel: 'Ripple',
+        prizePool: 2500,
+        currency: 'XRP',
+        currencyIcon: 'XRP',
+        entryFee: 50,
+        maxParticipants: 30,
+        currentParticipants: 12,
+        endsIn: 5400 + Math.floor(Math.random() * 3600),
+        status: 'filling',
+        participants: this.generateParticipants(12, 'xrp'),
+        description: 'Global XRP blitz. Fast settlement, massive pools.',
+      },
+      {
+        id: 'avax-rush-001',
+        type: 'AVAX Avalanche',
+        chain: 'avax',
+        chainLabel: 'Avalanche',
+        prizePool: 120,
+        currency: 'AVAX',
+        currencyIcon: 'AVAX',
+        entryFee: 2.5,
+        maxParticipants: 40,
+        currentParticipants: 28,
+        endsIn: 4500 + Math.floor(Math.random() * 1200),
+        status: 'live',
+        participants: this.generateParticipants(28, 'avax'),
+        description: 'Avalanche network rush. Sub-second finality pvp.',
+      },
+      {
+        id: 'trx-tron-001',
+        type: 'TRON Battle',
+        chain: 'trx',
+        chainLabel: 'Tron',
+        prizePool: 15000,
+        currency: 'TRX',
+        currencyIcon: 'TRX',
+        entryFee: 300,
+        maxParticipants: 60,
+        currentParticipants: 55,
+        endsIn: 1200 + Math.floor(Math.random() * 600),
+        status: 'live',
+        participants: this.generateParticipants(55, 'trx'),
+        description: 'Massive TRON battle. Lowest fees, highest participation.',
+      },
+      {
         id: 'eth-whale-001',
         type: 'Whale Battle',
         chain: 'eth',
@@ -58,56 +122,7 @@ class CompetitionManager {
         status: 'filling',
         participants: this.generateParticipants(14, 'eth'),
         description: 'High-stakes battle for whales only. Limited spots, massive rewards.',
-      },
-      {
-        id: 'eth-arena-002',
-        type: 'ETH vs ETH Arena',
-        chain: 'eth',
-        chainLabel: 'Ethereum',
-        prizePool: 1.2,
-        currency: 'ETH',
-        currencyIcon: 'Ξ',
-        entryFee: 0.025,
-        maxParticipants: 50,
-        currentParticipants: 50,
-        endsIn: 0,
-        status: 'ended',
-        winner: '0x7aB3...f2D1',
-        participants: this.generateParticipants(50, 'eth'),
-        description: 'Recently completed arena battle.',
-      },
-      {
-        id: 'sol-sprint-002',
-        type: 'SOL vs SOL Sprint',
-        chain: 'sol',
-        chainLabel: 'Solana',
-        prizePool: 30,
-        currency: 'SOL',
-        currencyIcon: '◎',
-        entryFee: 0.75,
-        maxParticipants: 40,
-        currentParticipants: 22,
-        endsIn: 5400 + Math.floor(Math.random() * 2700),
-        status: 'filling',
-        participants: this.generateParticipants(22, 'sol'),
-        description: 'Mid-range Solana competition with solid odds.',
-      },
-      {
-        id: 'base-arena-001',
-        type: 'BASE Battle Royale',
-        chain: 'base',
-        chainLabel: 'Base',
-        prizePool: 1.8,
-        currency: 'ETH',
-        currencyIcon: 'Ξ',
-        entryFee: 0.03,
-        maxParticipants: 60,
-        currentParticipants: 35,
-        endsIn: 4500 + Math.floor(Math.random() * 2000),
-        status: 'live',
-        participants: this.generateParticipants(35, 'eth'),
-        description: 'Battle on Base chain. Low gas, high rewards.',
-      },
+      }
     ];
   }
 
@@ -122,6 +137,14 @@ class CompetitionManager {
         addr = '';
         for (let j = 0; j < 44; j++) addr += b58[Math.floor(Math.random() * b58.length)];
         addr = addr.slice(0, 4) + '...' + addr.slice(-4);
+      } else if (chain === 'trx') {
+        addr = 'T';
+        for (let j = 0; j < 33; j++) addr += b58[Math.floor(Math.random() * b58.length)];
+        addr = addr.slice(0, 5) + '...' + addr.slice(-4);
+      } else if (chain === 'xrp') {
+        addr = 'r';
+        for (let j = 0; j < 33; j++) addr += b58[Math.floor(Math.random() * b58.length)];
+        addr = addr.slice(0, 5) + '...' + addr.slice(-4);
       } else {
         addr = '0x';
         for (let j = 0; j < 40; j++) addr += chars[Math.floor(Math.random() * chars.length)];

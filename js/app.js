@@ -302,7 +302,11 @@ class MetaRushApp {
 
     const chainSVG = {
       eth:  `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l3.5 5-3.5 1.5L2.5 6 6 1z" fill="#627eea" opacity="0.9"/><path d="M6 8l3.5-1.5L6 12 2.5 6.5 6 8z" fill="#627eea"/></svg>`,
+      bnb:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l2 2-2 2-2-2 2-2zM4 4.5l2 2-2 2-2-2 2-2zM10 4.5l2 2-2 2-2-2 2-2zM7 7.5l2 2-2 2-2-2 2-2z" fill="#f3ba2f"/></svg>`,
       sol:  `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4h7l-1 1.5H3L2 4zM2 7h6l1 1.5H3L2 7z" fill="#9945ff"/></svg>`,
+      xrp:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3L3 11" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+      avax: `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 2l5 9H2l5-9z" fill="#e84142"/></svg>`,
+      trx:  `<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 5-5 1-5 6V2z" fill="#ef0027"/></svg>`,
       base: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#4d8aff" stroke-width="1.2"/><circle cx="6" cy="6" r="2.2" fill="#4d8aff"/></svg>`,
     };
 
@@ -311,7 +315,7 @@ class MetaRushApp {
                aria-label="${comp.type} competition, prize pool ${comp.prizePool} ${comp.currency}">
         <div class="comp-card-header">
           <span class="comp-chain-badge ${comp.chain}">
-            ${chainSVG[comp.chain] || ''}
+            <span class="comp-chain-icon">${chainSVG[comp.chain] || ''}</span>
             ${comp.chainLabel}
           </span>
           <span class="comp-status ${comp.status}">
