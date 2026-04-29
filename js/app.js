@@ -317,7 +317,7 @@ class MetaRushApp {
     };
 
     return `
-      <article class="comp-card gpu-accelerated-item" data-id="${comp.id}" role="listitem" tabindex="0"
+      <article class="comp-card" data-id="${comp.id}" role="listitem" tabindex="0"
                aria-label="${comp.type} competition, prize pool ${comp.prizePool} ${comp.currency}">
         <div class="comp-card-header">
           <span class="comp-chain-badge ${comp.chain}">
@@ -475,7 +475,7 @@ class MetaRushApp {
     };
 
     this.lootboxGrid.innerHTML = window.lootBoxManager.boxes.map(box => `
-      <article class="lootbox-card ${box.id} gpu-accelerated-item" data-box="${box.id}" role="listitem"
+      <article class="lootbox-card ${box.id}" data-box="${box.id}" role="listitem"
                tabindex="0" aria-label="${box.tier} loot box, price ${box.price} ${box.currency}">
 
         <div class="lootbox-visual">
@@ -990,7 +990,7 @@ class MetaRushApp {
         const timerStr = t.status !== 'live' ? `${t.currentJoined}/${t.maxPlayers} oyuncu` : `CANLI`;
 
         return `
-          <article class="tourn-card gpu-accelerated-item" data-tourn-id="${t.id}" data-tourn-mode="${t.mode}" role="listitem"
+          <article class="tourn-card" data-tourn-id="${t.id}" data-tourn-mode="${t.mode}" role="listitem"
                    tabindex="0" aria-label="${t.modeLabel} turnuvası, giriş ${p.entryAmount} ${t.coin}">
 
             <div class="tourn-card-top">
