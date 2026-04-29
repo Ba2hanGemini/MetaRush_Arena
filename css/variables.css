@@ -276,6 +276,7 @@ button:focus-visible {
   background-clip: text;
   margin-bottom: var(--space-md);
   line-height: 1.15;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 .section-subtitle {
@@ -284,6 +285,7 @@ button:focus-visible {
   max-width: 560px;
   margin: 0 auto;
   line-height: 1.7;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
 .gradient-text {
