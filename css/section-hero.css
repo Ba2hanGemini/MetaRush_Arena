@@ -147,7 +147,7 @@
   line-height: 1.0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.1s both;
 }
 
@@ -155,30 +155,29 @@
   font-family: var(--font-display);
   font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 900;
-  letter-spacing: -1px;
+  letter-spacing: 4px; /* Wider spacing as requested */
   display: block;
-  background: var(--gradient-hero);
-  background-size: 300% 300%;
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 6s ease-in-out infinite;
-  text-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  animation: gradientShift 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); /* Subtle glow */
+  margin-bottom: 0.1em;
 }
 
-.title-line-1 { animation-delay: 0s; }
-.title-line-2 {
-  animation-delay: -2s;
-  background: linear-gradient(135deg, #a78bfa, #06b6d4);
-  -webkit-background-clip: text;
-  background-clip: text;
+.title-line-1 { 
+  background-image: linear-gradient(135deg, #ff4d88 0%, #ff8b54 100%); 
 }
+
+.title-line-2 {
+  background-image: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+  animation-delay: -1.3s;
+}
+
 .title-line-3 {
-  animation-delay: -4s;
-  background: linear-gradient(135deg, #f59e0b, #ec4899);
-  -webkit-background-clip: text;
-  background-clip: text;
+  background-image: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  animation-delay: -2.6s;
 }
 
 @keyframes gradientShift {
