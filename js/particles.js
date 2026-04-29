@@ -162,5 +162,5 @@ class ParticleSystem {
 
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-  new ParticleSystem('particles-canvas');
+  // new ParticleSystem('particles-canvas'); // Disabled for testing
 });
