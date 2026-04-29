@@ -93,6 +93,21 @@
   border-color: rgba(124,58,237,0.5);
 }
 
+.rarity-pill {
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+}
+.rarity-pill.common    { background: #94a3b8; color: #06060e; }
+.rarity-pill.uncommon  { background: #10b981; color: #06060e; }
+.rarity-pill.rare      { background: #3b82f6; color: #06060e; }
+.rarity-pill.epic      { background: #a78bfa; color: #06060e; }
+.rarity-pill.legendary { background: #f59e0b; color: #06060e; box-shadow: 0 0 20px rgba(245,158,11,0.3); }
+
 @media (max-width: 1024px) {
   .hero {
     display: flex;
@@ -194,8 +209,9 @@
   margin: 0 auto var(--space-2xl); /* Center within column */
   line-height: 1.75;
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.2s both;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0,0,0,0.5);
   font-weight: 500;
+  color: #ffffff; /* Brighter white */
 }
 .hero-subtitle strong { color: var(--accent-cyan); font-weight: 600; }
 
