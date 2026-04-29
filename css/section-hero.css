@@ -124,38 +124,38 @@
 /* ── Hero Version Badge (Watermark Cover) ── */
 .hero-version-badge {
   position: absolute;
-  top: 32px;
-  left: 32px;
+  top: 16px;
+  left: 16px;
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(124, 58, 237, 0.12);
-  border: 1px solid rgba(124, 58, 237, 0.35);
+  gap: 12px;
+  padding: 8px 20px;
+  background: rgba(124, 58, 237, 0.18);
+  border: 1px solid rgba(124, 58, 237, 0.45);
   border-radius: var(--radius-full);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 
-              0 0 15px rgba(124, 58, 237, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+              0 0 20px rgba(124, 58, 237, 0.25);
   pointer-events: none;
   animation: fadeInDown 0.8s var(--ease-out-expo) 0.5s both;
 }
 
 .version-dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--accent-purple);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-purple);
+  box-shadow: 0 0 12px var(--accent-purple);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 .version-text {
   font-family: var(--font-display);
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* Bigger font */
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 3px; /* More spacing for readability */
   color: var(--text-primary);
   text-transform: uppercase;
 }
