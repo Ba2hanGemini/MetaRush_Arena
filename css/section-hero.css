@@ -34,7 +34,7 @@
   left: 18px;
   width: 70px;
   height: 48px;
-  background: radial-gradient(circle, #1a0f2e 0%, rgba(26, 15, 46, 0.4) 100%);
+  background: radial-gradient(circle, #06060e 0%, rgba(6, 6, 14, 0.6) 100%);
   filter: blur(8px);
   z-index: 5;
   pointer-events: none;
