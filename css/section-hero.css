@@ -4,9 +4,9 @@
 .hero {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 5fr 3fr; /* 5:3 ratio as requested */
   align-items: center;
-  text-align: center; /* Center text by default in container */
+  text-align: left; /* Changed from center to left */
   padding-top: calc(var(--header-height) + 40px);
   padding-bottom: var(--space-5xl);
   position: relative;
@@ -53,11 +53,12 @@
 }
 
 .hero-content {
-  grid-column: 2;
+  grid-column: 1; /* Move to the left column */
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-right: 5%; /* Buffer from screen edge */
+  padding-left: 8%; /* Left padding for content */
+  padding-right: 0;
 }
 
 /* Eyebrow — status chip (Now Floating Globally) */
@@ -143,7 +144,7 @@
 .hero-title {
   width: 100%;
   max-width: 900px;
-  margin: 0 auto var(--space-xl); /* Center within column */
+  margin: 0 0 var(--space-xl); /* Remove auto margin to align left */
   line-height: 1.0;
   display: flex;
   flex-direction: column;
@@ -189,7 +190,7 @@
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   color: var(--text-secondary);
   max-width: 580px;
-  margin: 0 auto var(--space-2xl); /* Center within column */
+  margin: 0 0 var(--space-2xl); /* Remove auto margin to align left */
   line-height: 1.75;
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.2s both;
   text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0,0,0,0.5);
@@ -202,7 +203,7 @@
 .hero-actions {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center within column */
+  justify-content: flex-start; /* Align left */
   gap: var(--space-md);
   margin-bottom: var(--space-4xl);
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.3s both;
@@ -219,7 +220,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
   max-width: 680px;
-  margin: 0 auto; /* Center within column */
+  margin: 0; /* Align table left with buttons */
   animation: fadeInUp 0.9s var(--ease-out-expo) 0.4s both;
 }
 
@@ -249,7 +250,7 @@
   margin-bottom: 6px;
   display: flex;
   align-items: baseline;
-  justify-content: center; /* Center within stat card */
+  justify-content: flex-start; /* Align values left inside cards */
   gap: 4px;
 }
 
