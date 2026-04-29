@@ -317,17 +317,21 @@ button:focus-visible {
 }
 
 .section-subtitle {
-  color: #ffffff !important; /* Force pure white */
+  position: relative;
+  z-index: 10;
+  color: #ffffff !important;
   font-size: clamp(0.95rem, 1.2vw, 1.15rem);
   max-width: 650px;
   margin: 0 auto;
   line-height: 1.8;
-  text-shadow: 0 2px 15px rgba(0,0,0,0.95);
+  /* Sharper, more intense shadow to make the white pop */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.4);
   font-weight: 500;
   opacity: 1 !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.2px;
 }
 
 .gradient-text {
