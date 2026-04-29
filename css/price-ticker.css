@@ -1,0 +1,154 @@
+/* ══════════════════════════════════════════════
+   LIVE PRICE TICKER (Watermark Replacement)
+   ══════════════════════════════════════════════ */
+
+.price-ticker {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.price-ticker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(10, 10, 28, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  user-select: none;
+}
+
+.price-ticker-pill:hover {
+  background: rgba(124, 58, 237, 0.12);
+  border-color: rgba(124, 58, 237, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), var(--shadow-glow-purple);
+}
+
+.price-ticker-pill.active {
+  border-color: var(--accent-purple);
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.ticker-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 10px;
+  color: #fff;
+  background: var(--gradient-brand);
+  border-radius: 50%;
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.ticker-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+}
+
+.ticker-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  min-width: 80px;
+}
+
+.ticker-arrow {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+.price-ticker-pill.active .ticker-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.price-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 220px;
+  background: rgba(10, 10, 28, 0.95);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  z-index: 101;
+}
+
+.price-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.price-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.price-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-symbol {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.item-price {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-green);
+}
+
+/* Animations */
+@keyframes tickerPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.updating {
+  animation: tickerPulse 0.5s ease;
+}
