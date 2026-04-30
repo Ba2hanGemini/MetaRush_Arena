@@ -446,6 +446,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-base);
+  will-change: opacity;
 }
 
 .modal-overlay.active {
@@ -465,6 +466,7 @@
   transform: translateY(20px) scale(0.97);
   transition: transform var(--transition-slow), opacity var(--transition-slow);
   overflow: hidden;
+  will-change: transform, opacity;
 }
 
 /* shimmer top border */

@@ -351,13 +351,13 @@ button:focus-visible {
 /* ── Reveal Animation ── */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translate3d(0, 28px, 0);
   transition: opacity 550ms var(--ease-out-expo), transform 550ms var(--ease-out-expo);
   will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Ensures content never stays invisible (fallback) */
